@@ -1,7 +1,10 @@
 package io.github.bloodnighttw.CA4J.Body.Container;
 
+import io.github.bloodnighttw.CA4J.Body.Box.Import;
 import io.github.bloodnighttw.CA4J.Body.Interface.IMethod;
+import io.github.bloodnighttw.CA4J.Body.Type.ImportManager;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -10,16 +13,26 @@ public class MethodContainer extends Container implements IMethod {
 
     private boolean hasProbles = false;
     private boolean isFinal = false;
-    private Class parentClass;
+    private ClassContainer parentClass;
     private byte status = 0 ;
     private boolean isSynchronized = false ;
+    private String type = null;
+    private HashMap<String, ImportContainer > hmap;
+
+    public MethodContainer(String args){
+        if (args.equals("test"))
+            hmap=new HashMap<>();
+        else
+            hmap=parentClass.getParentCodeContainer().getImportContainers();
+    }
+
 
     /*
      *  @author bloodnighttw
      *
      *  status id meaining:
      *
-     *  0 -> no change! bug! pls report to bloodnighttw
+     *  0 -> no change! bug! pls report to bloodnighttw in https://github.com/bloodnighttw/CA4J
      *
      *  1 -> package public
      *  2 -> public
@@ -40,7 +53,7 @@ public class MethodContainer extends Container implements IMethod {
 
 
     @Override
-    protected void analyze(StringBuffer code) {
+    public void analyze(StringBuffer code) {
         String codeString = code.toString();
         Scanner sc = new Scanner(codeString.replace(" { "," ").replace("}"," } ").replace("("," ( ").replace(")"," ) ").replace(","," , "));
         //fit Scanner
@@ -62,12 +75,12 @@ public class MethodContainer extends Container implements IMethod {
             if(st.equals("{"))
                 inStatus = 3 ;
             else if(st.equals("("))
-                inStatus = 1 ;
+                inStatus = 2 ;
 
 
             if( inStatus == 0){
 
-                byte statusDecleartionTime = 0 ;
+
 
                 if (st.equals("synchronized"))
                     isSynchronized = true;
@@ -76,18 +89,28 @@ public class MethodContainer extends Container implements IMethod {
                 else if (st.equals("abstract") || st.equals("static"))
                     queue.add(st);
                 else {
-                    if(st.equals("public")){
-                        status = 2;
-                        statusDecleartionTime++;
-                    } else if (st.equals("protected")) {
-                        statusDecleartionTime++;
-                        status = 3;
-                    } else if (st.equals("private")) {
-                        statusDecleartionTime++;
-                        status = 4;
-                    }else
-                        inStatus = 1 ;
 
+                    byte statusDecleartionTime = 0 ;
+
+                    switch (st) {
+                        case "public":
+                            status = 2;
+                            statusDecleartionTime++;
+                            break;
+                        case "protected":
+                            status = 3;
+                            statusDecleartionTime++;
+                            break;
+                        case "private":
+                            status = 4;
+                            statusDecleartionTime++;
+                            break;
+                        default:
+                            inStatus = 1;
+                            type = ImportManager.analyze(st, this.hmap);
+                            System.out.println("namg");
+                            break;
+                    }
                     if(statusDecleartionTime > 1)
                         hasProbles = true;
 
@@ -96,12 +119,43 @@ public class MethodContainer extends Container implements IMethod {
 
             }
 
-            if(inStatus == 1){
+            if (inStatus == 1) {
+
+                String temp = queue.poll();
+                try{
+
+                    if(temp.equals("static"))
+                        status *= 6;
+                    else if (temp.equals("abstract"))
+                        status *= 5 ;
+                }catch (NullPointerException e){
+
+                }
+
+
+            }else if (inStatus == 2){
+
+                if (type == null )
+                    hasProbles = true;
+                String next =sc.next();
+                if(next.equals(")"))
+                    inStatus = 3;
+            }
+            else if (inStatus == 3){
 
             }
 
+
         }
 
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public boolean isFinal() {
+        return isFinal;
     }
 
     public boolean isStatic(){
@@ -132,6 +186,11 @@ public class MethodContainer extends Container implements IMethod {
         return (status == 4 || status == 20 || status == 24);
     }
 
+    public boolean hasProblems() {
+        return hasProbles;
+    }
 
-
+    public HashMap<String, ImportContainer> getHmap() {
+        return hmap;
+    }
 }

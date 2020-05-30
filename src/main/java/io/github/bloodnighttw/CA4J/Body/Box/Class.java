@@ -1,11 +1,23 @@
 package io.github.bloodnighttw.CA4J.Body.Box;
 
 import io.github.bloodnighttw.CA4J.Body.Interface.IClass;
+import io.github.bloodnighttw.CA4J.Body.Interface.IType;
 
-public class Class implements IClass {
+
+public class Class implements IClass, IType {
 
     private String name;
     private String packageName;
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getPakcage() {
+        return packageName;
+    }
 
     /*
      *

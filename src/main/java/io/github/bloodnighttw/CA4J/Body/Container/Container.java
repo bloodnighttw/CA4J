@@ -9,6 +9,6 @@ public abstract class Container {
         return raw;
     }
 
-    abstract void analyze(StringBuffer code);
+    abstract public void analyze(StringBuffer code);
 
 }

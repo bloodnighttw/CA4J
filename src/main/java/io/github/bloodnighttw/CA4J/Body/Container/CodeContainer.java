@@ -6,13 +6,13 @@ public class CodeContainer extends Container{
 
 
     private final Set<ClassContainer> classContainers;
-    private final Set<ImportContainer> ImportContainers;
+    private final HashMap<String, ImportContainer> ImportContainers;
     private PackageContainer packageContainer = null;
     private boolean hasWrongSymbolize = false ;
 
     public CodeContainer(StringBuffer code){
         classContainers = new HashSet<>();
-        ImportContainers = new HashSet<>();
+        ImportContainers = new HashMap<>();
         super.raw = code.toString();
         analyze(code);
     }
@@ -22,38 +22,11 @@ public class CodeContainer extends Container{
         this.classContainers.add(classContainer);
     }
 
+    public HashMap<String, ImportContainer> getImportContainers() {
+        return ImportContainers;
+    }
 
-    protected void analyze(StringBuffer code){
-
-        Scanner scanner=new Scanner(code.toString());
-
-        String temp;
-        Queue<String> queue=new LinkedList<>();
-        boolean waitDeclareDescription = false ;
-
-        while (scanner.hasNext()){
-            String st = scanner.nextLine();
-            String temp1=st.replace("{"," { ").replace("}"," } ").replace(";"," ; ").trim();
-            Scanner scanner2 = new Scanner(temp1);
-
-            while (scanner2.hasNext()){
-                String word = scanner.next();
-
-                if (!queue.isEmpty()){
-
-                }
-
-
-
-
-            }
-
-
-
-
-
-        }
-
+    public void analyze(StringBuffer code){
 
 
     }

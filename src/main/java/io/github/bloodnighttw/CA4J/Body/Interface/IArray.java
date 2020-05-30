@@ -1,7 +1,4 @@
 package io.github.bloodnighttw.CA4J.Body.Interface;
 
-public interface IImport extends IType{
-
-
-
+public interface IArray {
 }

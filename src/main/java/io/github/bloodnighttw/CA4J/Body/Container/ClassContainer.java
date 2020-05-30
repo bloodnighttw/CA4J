@@ -10,6 +10,7 @@ public class ClassContainer extends Container implements IClass {
     private final Set<FieldContainer> Fields;
     private final Set<MethodContainer> Methods;
     private PackageContainer Package;
+    private CodeContainer parentCodeContainer;
 
     public ClassContainer(PackageContainer Package){
         Fields = new HashSet<>();
@@ -19,7 +20,11 @@ public class ClassContainer extends Container implements IClass {
 
 
     @Override
-    protected void analyze(StringBuffer code) {
+    public void analyze(StringBuffer code) {
 
+    }
+
+    public CodeContainer getParentCodeContainer() {
+        return parentCodeContainer;
     }
 }
