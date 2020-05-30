@@ -1,4 +1,4 @@
-package io.github.bloodnighttw.CA4J.Container;
+package io.github.bloodnighttw.CA4J.Body.Container;
 
 public abstract class Container {
 
@@ -8,4 +8,7 @@ public abstract class Container {
     public String toString() {
         return raw;
     }
+
+    abstract void analyze(StringBuffer code);
+
 }

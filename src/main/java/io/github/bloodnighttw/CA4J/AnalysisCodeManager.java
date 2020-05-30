@@ -1,5 +1,6 @@
 package io.github.bloodnighttw.CA4J;
 
+import java.awt.*;
 import java.io.File;
 import java.io.InputStream;
 
@@ -15,7 +16,10 @@ public class AnalysisCodeManager {
         return instance;
     }
 
-    public void analysisCode(String code){
+    public Container analysisCode(String code){
+
+
+
 
     }
 
