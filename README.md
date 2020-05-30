@@ -1,7 +1,6 @@
 # :bow_and_arrow: Code Analysis for Java		
 
-![Build](https://github.com/bloodnighttw/CA4J/workflows/Java%20CI%20with%20Gradle/badge.svg) ![Issues](https://github.com/bloodnighttw/CA4J/workflows/Java%20CI%20with%20Gradle/badge.svg?event=issues) ![Java CI with Gradle](https://github.com/bloodnighttw/CA4J/workflows/Java%20CI%20with%20Gradle/badge.svg?event=label)
-
+![Build](https://github.com/bloodnighttw/CA4J/workflows/Java%20CI%20with%20Gradle/badge.svg)
 this lib is developing by [bloodnighttw](https://github.com/bloodnighttw),and want to indentity that a java program is write right or not.
 
 By the way,still writting :laughing: :laughing::laughing: .
