@@ -1,6 +1,5 @@
 package io.github.bloodnighttw.CA4J.Body.Container;
 
-import io.github.bloodnighttw.CA4J.Body.Box.Import;
 import io.github.bloodnighttw.CA4J.Body.Interface.IMethod;
 import io.github.bloodnighttw.CA4J.Body.Type.ImportManager;
 
@@ -71,10 +70,10 @@ public class MethodContainer extends Container implements IMethod {
          */
 
         while (sc.hasNext()){
-            String st= sc.next();
-            if(st.equals("{"))
+            String next= sc.next();
+            if(next.equals("{"))
                 inStatus = 3 ;
-            else if(st.equals("("))
+            else if(next.equals("("))
                 inStatus = 2 ;
 
 
@@ -82,17 +81,17 @@ public class MethodContainer extends Container implements IMethod {
 
 
 
-                if (st.equals("synchronized"))
+                if (next.equals("synchronized"))
                     isSynchronized = true;
-                else if (st.equals("final"))
+                else if (next.equals("final"))
                     isFinal = true;
-                else if (st.equals("abstract") || st.equals("static"))
-                    queue.add(st);
+                else if (next.equals("abstract") || next.equals("static"))
+                    queue.add(next);
                 else {
 
                     byte statusDecleartionTime = 0 ;
 
-                    switch (st) {
+                    switch (next) {
                         case "public":
                             status = 2;
                             statusDecleartionTime++;
@@ -107,7 +106,7 @@ public class MethodContainer extends Container implements IMethod {
                             break;
                         default:
                             inStatus = 1;
-                            type = ImportManager.analyze(st, this.hmap);
+                            type = ImportManager.analyze(next, this.hmap);
                             System.out.println("namg");
                             break;
                     }
@@ -137,9 +136,12 @@ public class MethodContainer extends Container implements IMethod {
 
                 if (type == null )
                     hasProbles = true;
-                String next =sc.next();
-                if(next.equals(")"))
+
+                if(next.equals(")")){
                     inStatus = 3;
+                }
+
+
             }
             else if (inStatus == 3){
 
