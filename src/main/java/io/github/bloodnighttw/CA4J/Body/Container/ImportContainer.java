@@ -14,6 +14,7 @@ public class ImportContainer extends Import{
         String[] stArray=st.split("\\.");
         super.name = stArray[stArray.length-1];
         super.packageName = st ;
+        //System.out.println(super.packageName);
     }
 
     @Override
@@ -23,7 +24,7 @@ public class ImportContainer extends Import{
 
     @Override
     public String getPakcage() {
-        return super.name;
+        return super.packageName;
     }
 
 }

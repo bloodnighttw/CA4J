@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class ImportManager {
 
     // not support array type,in the future i will do it
-    public static String analyze(String string, HashMap<String, ImportContainer> hmap){
+    public static String check(String string, HashMap<String, ImportContainer> hmap){
 
         ImportContainer importContainer = hmap.get(string);
         if (importContainer != null)

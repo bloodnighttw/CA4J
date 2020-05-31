@@ -1,0 +1,3 @@
+public  synchronized bang bag (int a , long b , short 12346789){
+
+}

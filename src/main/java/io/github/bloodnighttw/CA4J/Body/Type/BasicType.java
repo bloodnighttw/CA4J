@@ -35,7 +35,7 @@ public final class BasicType {
             case VOID:
                 return VOID;
             default:
-                return null;
+                return string;
         }
 
     }
